@@ -8,6 +8,8 @@ Chronic diseases such as diabetes and hypertension often develop silently over t
 
 As a result, users may collect activity and health data but still receive no meaningful, personalised, and timely intervention. The core gap is not the lack of data, but the lack of a system that translates data into actionable behaviour change before disease progression occurs.
 
+Additionally, current health prediction systems often overlook female-specific physiological variations such as menstrual cycles. Hormonal fluctuations significantly affect metabolism, sleep, and behaviour, leading to reduced prediction accuracy and less effective personalised interventions for female users.
+
 #### Key pain points
 
 - Chronic diseases develop gradually and are often detected too late.
@@ -28,6 +30,8 @@ The platform is designed to work for both:
 
 The goal is to shift from **passive tracking** to **proactive intervention**.
 
+The system also incorporates cycle-aware modelling for female users, enabling biologically contextual and time-aware personalisation
+
 ---
 
 ### Dataset Strategy
@@ -47,6 +51,9 @@ We use **feature-level integration** + **synthetic time-series generation**.
 
 4. Activity
 <https://www.kaggle.com/datasets/monicahjones/steps-tracker-dataset>
+
+5. Menstrual Cycle (female-specific)
+<https://www.kaggle.com/datasets/akshayas02/menstrual-cycle-data-with-factors-dataset>
 
 #### How to synthesize data
 
@@ -95,6 +102,8 @@ For each user, we simulate daily changes:
 - sleep varies (±1–2 hours)
 - stress changes based on pattern
 - resting heart rate trends slightly shift
+- menstrual cycle phase progression (for female users)
+- behavioural variation influenced by cycle phase (e.g., fatigue, cravings, activity level)
 
 We introduce behaviour trends:
 
@@ -123,6 +132,7 @@ For each user-day, we calculate a composite score:
 - Clinical factors (high weight)
 - Behavioural trends (moderate weight)
 - Lifestyle context (supporting weight)
+- cycle phase context (for female users, as a modifier)
 
 Example:
 
@@ -339,6 +349,8 @@ USERS ||--|| GAMIFICATION : owns
 | stress_score | int | stress level (1–10) |
 | diet_score | int | diet quality (1–10) |
 | wearable_flag | boolean | wearable vs phone user |
+| cycle_phase | string | menstrual phase (if applicable) |
+| female_flag | boolean | indicates female user |
 | risk_score | float | computed risk (0–1) |
 | label | int | 0=stable,1=rising,2=high |
 
@@ -388,6 +400,7 @@ USERS ||--|| GAMIFICATION : owns
 - Personalised intervention ranking
 - Adaptive habit system
 - Explainable AI (why risk changed)
+- Cycle-aware risk prediction (female-specific)
 
 #### Gamification
 
@@ -536,6 +549,7 @@ flowchart LR
 A[Clinical Dataset] --> D[Feature Integration]
 B[Lifestyle Dataset] --> D
 C[Activity Dataset] --> D
+M[Menstrual Dataset] --> D
 
 D --> E[Synthetic Time-Series Generator]
 E --> F[Training Dataset]
