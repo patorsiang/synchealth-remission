@@ -55,7 +55,7 @@ We use **feature-level integration** + **synthetic time-series generation**.
 5. Menstrual Cycle (female-specific)
 <https://www.kaggle.com/datasets/akshayas02/menstrual-cycle-data-with-factors-dataset>
 
-#### How to synthesize data
+#### How to synthesise data
 
 Since most real-world datasets are cross-sectional (not time-series), we generate a synthetic longitudinal dataset to simulate user behaviour over time.
 
@@ -144,7 +144,7 @@ Example:
 
 ##### Step 6 — Generate labels
 
-We convert risk score into 3 classes:
+We convert the risk score into 3 classes:
 
 - 0–2 → Stable
 - 3–5 → Rising Risk
@@ -654,7 +654,7 @@ synchealth-remission/
 ```txt
 main        → production-ready (demo day)
 dev         → integration branch
-feature/*→ new features
+feature/*   → new features
 fix/*       → bug fixes
 hotfix/*    → urgent fixes (demo-critical)
 ```
