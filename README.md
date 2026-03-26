@@ -4,7 +4,7 @@
 
 SyncHealth Remission is a preventive health intelligence system that turns fragmented health data into early risk detection and personalised daily intervention.
 
-Our prototype is built around a **3-layer AI architecture** inspired by Yanew’s direction:
+Our prototype is built around a **3-layer AI architecture**:
 
 1. **Risk Trajectory Engine**  
    predicts whether a user is moving toward diabetes risk based on clinical + behavioural patterns over time
